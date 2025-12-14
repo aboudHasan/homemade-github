@@ -1,0 +1,24 @@
+{
+  "name": "homemade-github",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/aboudHasan/homemade-github#readme",
+  "bugs": {
+    "url": "https://github.com/aboudHasan/homemade-github/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aboudHasan/homemade-github.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "node": "^24.12.0"
+  }
+}
