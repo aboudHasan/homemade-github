@@ -15,15 +15,37 @@ export const login = async (req: express.Request, res: express.Response) => {
       id: number;
       username: string;
       password: string;
-      session_token?: string;
     }
 
-    const hash = authentication(password);
-    pool.query<RowDataPacket[]>(
-      "SELECT * FROM users WHERE username = ? AND password"
+    const [rows] = await pool.execute<User[]>(
+      "SELECT id, username, password FROM users WHERE username = ?",
+      [username]
     );
-  } catch (error) {
+
+    if (rows.length === 0) {
+      throw new Error("Login information incorrect");
+    } else {
+      const user = rows[0];
+      if (!user || user.password === authentication(password)) {
+        const token: string = random();
+        await pool.execute<ResultSetHeader>(
+          "UPDATE users SET session_token = ? WHERE username = ?",
+          [token, username]
+        );
+
+        res.cookie("session_token", token, {
+          httpOnly: true,
+          secure: process.env.BUILD === "production",
+          maxAge: 60 * 60 * 1000,
+        });
+
+        res.json({ message: "Logged in successfully" });
+      } else {
+        throw new Error("Login information incorrect");
+      }
+    }
+  } catch (error: Error | any) {
     console.log(error);
-    return res.sendStatus(400);
+    return res.status(400).json({ message: "Login information incorrect" });
   }
 };
