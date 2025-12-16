@@ -1,7 +1,27 @@
 import express from "express";
-import { random, authentication } from "../helpers/crypto.js";
+import { random, authentication, verifyPassword } from "../helpers/crypto.js";
 import { pool } from "../db/connection.js";
 import { type RowDataPacket, type ResultSetHeader } from "mysql2";
+import { verify } from "node:crypto";
+
+// doesn't check if you're even logged in
+export const logout = async (req: express.Request, res: express.Response) => {
+  try {
+    if (!req.body.username) {
+      return res.status(400).json({ message: "Failed to logout" });
+    }
+    const username: string = req.body.username;
+    await pool.execute<ResultSetHeader>(
+      "UPDATE users SET session_token = NULL, timestamp = NULL WHERE username = ?",
+      [username]
+    );
+    res.clearCookie("session_token");
+    res.json({ message: "Successfully logged out" });
+  } catch (error: Error | any) {
+    console.log(error);
+    return res.status(400).json({ message: "failed to logout" });
+  }
+};
 
 export const login = async (req: express.Request, res: express.Response) => {
   try {
@@ -10,8 +30,8 @@ export const login = async (req: express.Request, res: express.Response) => {
         .status(400)
         .json({ message: "Missing username and/or password" });
     }
-    const username = req.body.username;
-    const password = req.body.password;
+    const username: string = req.body.username;
+    const password: string = req.body.password;
     if (!username || !password) {
       return res.sendStatus(400);
     }
@@ -29,27 +49,36 @@ export const login = async (req: express.Request, res: express.Response) => {
 
     if (rows.length === 0) {
       return res.status(400).json({ message: "Login information incorrect" });
-    } else {
-      const user = rows[0];
-      if (!user || user.password === authentication(password)) {
-        const token: string = random();
-        const timestamp = Date.now() + 60 * 60 * 1000;
-        await pool.execute<ResultSetHeader>(
-          "UPDATE users SET session_token = ?, timestamp = ? WHERE username = ?",
-          [token, timestamp, username]
-        );
-
-        res.cookie("session_token", token, {
-          httpOnly: true,
-          secure: process.env.BUILD === "production",
-          maxAge: 60 * 60 * 1000,
-        });
-
-        res.json({ message: "Logged in successfully" });
-      } else {
-        return res.status(400).json({ message: "Login information incorrect" });
-      }
     }
+
+    const user: User = rows[0];
+    if (!user) {
+      return res.status(400).json({ message: "Login information incorrect" });
+    }
+
+    const isValid: boolean = await verifyPassword(password, user.password);
+
+    if (!isValid) {
+      return res.status(400).json({ message: "Login information incorrect" });
+    }
+
+    const token: string = random();
+    const timestamp = Date.now() + 60 * 60 * 1000;
+    await pool.execute<ResultSetHeader>(
+      "UPDATE users SET session_token = ?, timestamp = ? WHERE username = ?",
+      [token, timestamp, username]
+    );
+
+    res.cookie("session_token", token, {
+      httpOnly: true,
+      secure: process.env.BUILD === "production",
+      maxAge: 60 * 60 * 1000,
+    });
+
+    res.json({
+      message: "Logged in successfully",
+      username: req.body.username,
+    });
   } catch (error: Error | any) {
     console.log(error);
     return res.status(400).json({ message: "Login information incorrect" });
