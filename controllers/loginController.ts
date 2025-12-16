@@ -1,12 +1,17 @@
 import express from "express";
-import { random, authentication } from "../helpers/auth.js";
+import { random, authentication } from "../helpers/crypto.js";
 import { pool } from "../db/connection.js";
 import { type RowDataPacket, type ResultSetHeader } from "mysql2";
 
 export const login = async (req: express.Request, res: express.Response) => {
   try {
-    const { username, password } = req.body;
-
+    if (!req.body.username || !req.body.password) {
+      return res
+        .status(400)
+        .json({ message: "Missing username and/or password" });
+    }
+    const username = req.body.username;
+    const password = req.body.password;
     if (!username || !password) {
       return res.sendStatus(400);
     }
@@ -23,14 +28,15 @@ export const login = async (req: express.Request, res: express.Response) => {
     );
 
     if (rows.length === 0) {
-      throw new Error("Login information incorrect");
+      return res.status(400).json({ message: "Login information incorrect" });
     } else {
       const user = rows[0];
       if (!user || user.password === authentication(password)) {
         const token: string = random();
+        const timestamp = Date.now() + 60 * 60 * 1000;
         await pool.execute<ResultSetHeader>(
-          "UPDATE users SET session_token = ? WHERE username = ?",
-          [token, username]
+          "UPDATE users SET session_token = ?, timestamp = ? WHERE username = ?",
+          [token, timestamp, username]
         );
 
         res.cookie("session_token", token, {
@@ -41,7 +47,7 @@ export const login = async (req: express.Request, res: express.Response) => {
 
         res.json({ message: "Logged in successfully" });
       } else {
-        throw new Error("Login information incorrect");
+        return res.status(400).json({ message: "Login information incorrect" });
       }
     }
   } catch (error: Error | any) {
