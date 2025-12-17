@@ -33,7 +33,9 @@ export const login = async (req: express.Request, res: express.Response) => {
     const username: string = req.body.username;
     const password: string = req.body.password;
     if (!username || !password) {
-      return res.sendStatus(400);
+      return res
+        .status(400)
+        .json({ message: "Missing username and/or password" });
     }
 
     interface User extends RowDataPacket {

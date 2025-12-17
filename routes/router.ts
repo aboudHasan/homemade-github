@@ -7,7 +7,7 @@ import { loginLimit, createLimit, globalLimit } from "../middleware/limiter.js";
 const router: express.Router = express.Router();
 
 router.post("/login", loginLimit, login);
-router.post("/logout", globalLimit, logout);
+router.post("/logout", globalLimit, isAuthenticated, logout);
 router.post("/createProject", createLimit, isAuthenticated, createRepo);
 
 export default router;
