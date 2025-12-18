@@ -15,11 +15,11 @@ import {
 
 const router: express.Router = express.Router();
 
-router.post("/login", loginLimit, login);
-router.post("/logout", globalLimit, isAuthenticated, logout);
-router.post("/createProject", createLimit, isAuthenticated, createRepo);
-router.get("/projects", viewLimit, viewAllRepos);
-router.get("/projects/:projectName", viewLimit, viewRepos);
-router.get("/projects/:projectName/*splat", viewLimit, viewRepos);
+router.post("/api/login", loginLimit, login);
+router.post("/api/logout", globalLimit, isAuthenticated, logout);
+router.post("/api/createProject", createLimit, isAuthenticated, createRepo);
+router.get("/api/projects", viewLimit, viewAllRepos);
+router.get("/api/projects/:projectName", viewLimit, viewRepos);
+router.get("/api/projects/:projectName/*splat", viewLimit, viewRepos);
 
 export default router;
