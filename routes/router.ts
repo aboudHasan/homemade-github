@@ -14,5 +14,6 @@ const router: express.Router = express.Router();
 router.post("/login", loginLimit, login);
 router.post("/logout", globalLimit, isAuthenticated, logout);
 router.post("/createProject", createLimit, isAuthenticated, createRepo);
+router.get("/projects/:projectName/*splat", viewLimit, viewRepos);
 
 export default router;
