@@ -73,3 +73,8 @@ export const createRepo = async (
     });
   });
 };
+
+export const viewRepos = async (
+  req: express.Request,
+  res: express.Response
+) => {};

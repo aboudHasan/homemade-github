@@ -20,3 +20,10 @@ export const globalLimit = rateLimit({
   message: { message: "Too many request attempts" },
   standardHeaders: true,
 });
+
+export const viewLimit = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 30,
+  message: { message: "Too many view attempts" },
+  standardHeaders: true,
+});

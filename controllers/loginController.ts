@@ -4,7 +4,6 @@ import { pool } from "../db/connection.js";
 import { type RowDataPacket, type ResultSetHeader } from "mysql2";
 import { verify } from "node:crypto";
 
-// doesn't check if you're even logged in
 export const logout = async (req: express.Request, res: express.Response) => {
   try {
     if (!req.body.username) {

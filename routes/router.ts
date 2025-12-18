@@ -1,8 +1,13 @@
 import express from "express";
 import { login, logout } from "../controllers/loginController.js";
-import { createRepo } from "../controllers/projectsController.js";
+import { createRepo, viewRepos } from "../controllers/projectsController.js";
 import { isAuthenticated } from "../middleware/authentication.js";
-import { loginLimit, createLimit, globalLimit } from "../middleware/limiter.js";
+import {
+  loginLimit,
+  createLimit,
+  globalLimit,
+  viewLimit,
+} from "../middleware/limiter.js";
 
 const router: express.Router = express.Router();
 
