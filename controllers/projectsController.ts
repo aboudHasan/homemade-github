@@ -134,3 +134,39 @@ export const viewRepos = async (
     res.status(500).json({ message: "server problem" });
   }
 };
+
+export const viewAllRepos = async (
+  req: express.Request,
+  res: express.Response
+) => {
+  try {
+    const projectsFolder = `/home/${targetUser}/projects`;
+    await fs.access(projectsFolder);
+
+    const projectContents = await fs.readdir(projectsFolder, {
+      withFileTypes: true,
+    });
+
+    const responseObject = await Promise.all(
+      projectContents.map(async (item) => {
+        const stats = await fs.stat(path.join(projectsFolder, item.name));
+
+        return {
+          name: item.name,
+          type: item.isDirectory() ? "directory" : "file",
+          size: item.isFile() ? stats.size : 0,
+          modified: stats.mtime.toISOString(),
+        };
+      })
+    );
+
+    const onlyRepos = responseObject.filter(
+      (item) => item.type === "directory"
+    );
+
+    res.json(onlyRepos);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "server problem" });
+  }
+};
