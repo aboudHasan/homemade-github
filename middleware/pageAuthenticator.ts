@@ -7,7 +7,7 @@ interface User extends RowDataPacket {
   timestamp: number;
 }
 
-export const isAuthenticated = async (
+export const requireAuth = async (
   req: express.Request,
   res: express.Response,
   next: express.NextFunction
@@ -15,7 +15,7 @@ export const isAuthenticated = async (
   try {
     const sessionToken = req.cookies["session_token"];
     if (!sessionToken) {
-      return res.status(401).json({ message: "Missing session token" });
+      return res.redirect("/login");
     }
 
     const [rows] = await pool.execute<User[]>(
@@ -25,16 +25,18 @@ export const isAuthenticated = async (
 
     if (rows.length === 0) {
       res.clearCookie("session_token");
-      return res.status(400).json({ message: "Failed to authenticate" });
+      return res.redirect("/login");
     }
+
     const user = rows[0];
     if (Date.now() > user.timestamp) {
       res.clearCookie("session_token");
-      return res.status(400).json({ message: "Failed to authenticate" });
+      return res.redirect("/login");
     }
+
     next();
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ message: "Failed to authenticate" });
+    return res.redirect("/login");
   }
 };

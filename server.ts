@@ -2,7 +2,8 @@ import cookieParser from "cookie-parser";
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
-import router from "./routes/router.js";
+import router from "./routes/serverRouter.js";
+import publicRouter from "./routes/publicRouter.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -12,7 +13,8 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
-app.use("/", router);
+app.use("/", publicRouter);
+app.use("/api", router);
 
 app.listen(port, () => {
   console.log(`listening on port ${port}\nhttp://localhost:${port}`);
