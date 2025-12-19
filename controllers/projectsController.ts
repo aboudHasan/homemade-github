@@ -56,7 +56,7 @@ export const createRepo = async (
     child.stderr.on("data", (data) => {
       errorOutput += data.toString();
     });
-    child.stdin.write(testScript);
+    child.stdin.write(createRepoScript);
     child.stdin.end();
 
     child.on("close", (code) => {

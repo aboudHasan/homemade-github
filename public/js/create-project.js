@@ -22,14 +22,10 @@ document.getElementById("create-form").addEventListener("submit", async (e) => {
     const data = await response.json();
 
     if (response.ok) {
-      msgDiv.textContent = "Success! Redirecting...";
+      msgDiv.textContent = `Success! SSH: ${data.gitURL}`;
       msgDiv.className =
         "p-4 rounded text-sm text-center bg-green-900/20 text-green-400 border border-green-900/50";
       msgDiv.classList.remove("hidden");
-
-      setTimeout(() => {
-        window.location.href = "/projects";
-      }, 1000);
     } else {
       throw new Error(data.error || "Failed to create project");
     }
