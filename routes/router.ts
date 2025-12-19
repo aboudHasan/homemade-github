@@ -21,5 +21,5 @@ router.post("/api/createProject", createLimit, isAuthenticated, createRepo);
 router.get("/api/projects", viewLimit, viewAllRepos);
 router.get("/api/projects/:projectName", viewLimit, viewRepos);
 router.get("/api/projects/:projectName/*splat", viewLimit, viewRepos);
-
+router.get("/api/authenticate", globalLimit, isAuthenticated);
 export default router;
