@@ -26,7 +26,6 @@ document.getElementById("create-form").addEventListener("submit", async (e) => {
         <div class="space-y-3">
           <p class="font-medium text-green-400">Repository created successfully!</p>
           <div class="bg-zinc-900 border border-green-900/30 rounded p-3">
-            <p class="text-xs text-zinc-400 mb-1">SSH URL:</p>
             <code class="text-xs text-zinc-200 break-all">${data.gitUrl}</code>
           </div>
           <div class="flex gap-2 justify-center mt-4">
