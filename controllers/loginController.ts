@@ -6,13 +6,13 @@ import { verify } from "node:crypto";
 
 export const logout = async (req: express.Request, res: express.Response) => {
   try {
-    if (!req.body.username) {
+    if (!req.cookies.session_token) {
       return res.status(400).json({ message: "Failed to logout" });
     }
-    const username: string = req.body.username;
+    const token: string = req.cookies.session_token;
     await pool.execute<ResultSetHeader>(
-      "UPDATE users SET session_token = NULL, timestamp = NULL WHERE username = ?",
-      [username]
+      "UPDATE users SET session_token = NULL, timestamp = NULL WHERE session_token = ?",
+      [token]
     );
     res.clearCookie("session_token");
     res.json({ message: "Successfully logged out" });
