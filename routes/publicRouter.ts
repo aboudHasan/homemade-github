@@ -21,6 +21,20 @@ publicRouter.get("/projects", (req: express.Request, res: express.Response) => {
 });
 
 publicRouter.get(
+  "/projects/:projectName",
+  (req: express.Request, res: express.Response) => {
+    res.sendFile(path.join(__dirname, "../public/projects.html"));
+  }
+);
+
+publicRouter.get(
+  "/projects/:projectName/*splat",
+  (req: express.Request, res: express.Response) => {
+    res.sendFile(path.join(__dirname, "../public/projects.html"));
+  }
+);
+
+publicRouter.get(
   "/create-project",
   requireAuth,
   (req: express.Request, res: express.Response) => {

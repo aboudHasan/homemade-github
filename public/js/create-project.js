@@ -30,7 +30,7 @@ document.getElementById("create-form").addEventListener("submit", async (e) => {
             <code class="text-xs text-zinc-200 break-all">${data.gitUrl}</code>
           </div>
           <div class="flex gap-2 justify-center mt-4">
-            <a href="/projects?repo=${input.value}" class="text-sm text-blue-400 hover:text-blue-300 underline">
+            <a href="/projects/${input.value}" class="text-sm text-blue-400 hover:text-blue-300 underline">
               View Repository
             </a>
             <span class="text-zinc-600">|</span>
@@ -44,6 +44,10 @@ document.getElementById("create-form").addEventListener("submit", async (e) => {
         "p-4 rounded text-sm text-center bg-green-900/20 text-green-400 border border-green-900/50";
       msgDiv.classList.remove("hidden");
       input.value = "";
+      input.disabled = false;
+      btn.disabled = false;
+      btn.classList.remove("opacity-50", "cursor-not-allowed");
+      btn.innerHTML = `<span>Create Repository</span>`;
     } else {
       throw new Error(data.error || "Failed to create project");
     }

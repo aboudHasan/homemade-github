@@ -46,6 +46,26 @@ export const createRepo = async (
       return res.status(400).json({ error: "Invalid project name." });
     }
 
+    const projectsFolder = `/home/${targetUser}/projects`;
+    const projectPath = path.join(projectsFolder, projectName);
+    const gitPath = `/home/${targetUser}/git/${projectName}.git`;
+
+    try {
+      const [projectExists, gitExists] = await Promise.allSettled([
+        fs.access(projectPath),
+        fs.access(gitPath),
+      ]);
+
+      if (
+        projectExists.status === "fulfilled" ||
+        gitExists.status === "fulfilled"
+      ) {
+        return res.status(409).json({
+          error: "A repository with this name already exists.",
+        });
+      }
+    } catch (error) {}
+
     const child = spawn("bash", ["-s", projectName]);
     let output = "";
     let errorOutput = "";
