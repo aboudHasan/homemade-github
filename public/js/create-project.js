@@ -8,7 +8,7 @@ document.getElementById("create-form").addEventListener("submit", async (e) => {
   input.disabled = true;
   btn.disabled = true;
   btn.classList.add("opacity-50", "cursor-not-allowed");
-  btn.innerHTML = `<span class="inline-block w-4 h-4 border-2 border-zinc-600 border-t-zinc-900 rounded-full animate-spin"></span> Creating...`;
+  btn.innerHTML = `<span class="inline-block w-4 h-4 border-2 border-zinc-600 border-t-zinc-900 rounded-full"></span> Creating...`;
 
   msgDiv.className = "hidden";
 
@@ -22,10 +22,28 @@ document.getElementById("create-form").addEventListener("submit", async (e) => {
     const data = await response.json();
 
     if (response.ok) {
-      msgDiv.textContent = `Success! SSH: ${data.gitURL}`;
+      msgDiv.innerHTML = `
+        <div class="space-y-3">
+          <p class="font-medium text-green-400">Repository created successfully!</p>
+          <div class="bg-zinc-900 border border-green-900/30 rounded p-3">
+            <p class="text-xs text-zinc-400 mb-1">SSH URL:</p>
+            <code class="text-xs text-zinc-200 break-all">${data.gitUrl}</code>
+          </div>
+          <div class="flex gap-2 justify-center mt-4">
+            <a href="/projects?repo=${input.value}" class="text-sm text-blue-400 hover:text-blue-300 underline">
+              View Repository
+            </a>
+            <span class="text-zinc-600">|</span>
+            <a href="/create-project" class="text-sm text-zinc-400 hover:text-white underline">
+              Create Another
+            </a>
+          </div>
+        </div>
+      `;
       msgDiv.className =
         "p-4 rounded text-sm text-center bg-green-900/20 text-green-400 border border-green-900/50";
       msgDiv.classList.remove("hidden");
+      input.value = "";
     } else {
       throw new Error(data.error || "Failed to create project");
     }
