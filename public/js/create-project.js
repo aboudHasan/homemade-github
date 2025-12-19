@@ -32,10 +32,6 @@ document.getElementById("create-form").addEventListener("submit", async (e) => {
             <a href="/projects/${input.value}" class="text-sm text-blue-400 hover:text-blue-300 underline">
               View Repository
             </a>
-            <span class="text-zinc-600">|</span>
-            <a href="/create-project" class="text-sm text-zinc-400 hover:text-white underline">
-              Create Another
-            </a>
           </div>
         </div>
       `;
