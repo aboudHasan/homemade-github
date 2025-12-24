@@ -35,10 +35,17 @@ publicRouter.get(
 );
 
 publicRouter.get(
+  "/create-project.html",
+  (req: express.Request, res: express.Response) => {
+    res.redirect("/");
+  }
+);
+
+publicRouter.get(
   "/create-project",
   requireAuth,
   (req: express.Request, res: express.Response) => {
-    res.sendFile(path.join(__dirname, "../public/create-project.html"));
+    res.sendFile(path.join(__dirname, "../protected/create-project.html"));
   }
 );
 
