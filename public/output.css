@@ -359,9 +359,6 @@ video {
 .hidden {
   display: none;
 }
-.h-4 {
-  height: 1rem;
-}
 .h-5 {
   height: 1.25rem;
 }
@@ -373,9 +370,6 @@ video {
 }
 .w-32 {
   width: 8rem;
-}
-.w-4 {
-  width: 1rem;
 }
 .w-48 {
   width: 12rem;
@@ -445,11 +439,6 @@ video {
 .gap-4 {
   gap: 1rem;
 }
-.space-y-3 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-y-reverse: 0;
-  margin-top: calc(0.75rem * (1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(0.75rem * var(--tw-space-y-reverse));
-}
 .space-y-5 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
   margin-top: calc(1.25rem * (1 - var(--tw-space-y-reverse)));
@@ -478,9 +467,6 @@ video {
 .whitespace-nowrap {
   white-space: nowrap;
 }
-.break-all {
-  word-break: break-all;
-}
 .rounded {
   border-radius: 0.25rem;
 }
@@ -499,18 +485,8 @@ video {
 .border-b {
   border-bottom-width: 1px;
 }
-.border-green-900\/30 {
-  border-color: rgba(20, 83, 45, 0.3);
-}
-.border-green-900\/50 {
-  border-color: rgba(20, 83, 45, 0.5);
-}
 .border-red-900\/50 {
   border-color: rgba(127, 29, 29, 0.5);
-}
-.border-zinc-600 {
-  --tw-border-opacity: 1;
-  border-color: rgb(82 82 91 / var(--tw-border-opacity, 1));
 }
 .border-zinc-700 {
   --tw-border-opacity: 1;
@@ -523,13 +499,6 @@ video {
 .border-t-zinc-400 {
   --tw-border-opacity: 1;
   border-top-color: rgb(161 161 170 / var(--tw-border-opacity, 1));
-}
-.border-t-zinc-900 {
-  --tw-border-opacity: 1;
-  border-top-color: rgb(24 24 27 / var(--tw-border-opacity, 1));
-}
-.bg-green-900\/20 {
-  background-color: rgba(20, 83, 45, 0.2);
 }
 .bg-red-950\/20 {
   background-color: rgba(69, 10, 10, 0.2);
@@ -561,9 +530,6 @@ video {
 .bg-zinc-950 {
   --tw-bg-opacity: 1;
   background-color: rgb(9 9 11 / var(--tw-bg-opacity, 1));
-}
-.p-3 {
-  padding: 0.75rem;
 }
 .p-4 {
   padding: 1rem;
@@ -666,10 +632,6 @@ video {
   --tw-text-opacity: 1;
   color: rgb(96 165 250 / var(--tw-text-opacity, 1));
 }
-.text-green-400 {
-  --tw-text-opacity: 1;
-  color: rgb(74 222 128 / var(--tw-text-opacity, 1));
-}
 .text-red-300\/80 {
   color: hsla(0, 94%, 82%, 0.8);
 }
@@ -684,10 +646,6 @@ video {
 .text-zinc-100 {
   --tw-text-opacity: 1;
   color: rgb(244 244 245 / var(--tw-text-opacity, 1));
-}
-.text-zinc-200 {
-  --tw-text-opacity: 1;
-  color: rgb(228 228 231 / var(--tw-text-opacity, 1));
 }
 .text-zinc-300 {
   --tw-text-opacity: 1;
@@ -748,10 +706,6 @@ body {
 }
 .hover\:bg-zinc-800\/50:hover {
   background-color: rgba(39, 39, 42, 0.5);
-}
-.hover\:text-blue-300:hover {
-  --tw-text-opacity: 1;
-  color: rgb(147 197 253 / var(--tw-text-opacity, 1));
 }
 .hover\:text-red-300:hover {
   --tw-text-opacity: 1;
