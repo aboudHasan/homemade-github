@@ -9,20 +9,24 @@ const __dirname = path.dirname(__filename);
 const publicRouter: express.Router = express.Router();
 
 publicRouter.get("/", (req: express.Request, res: express.Response) => {
+  console.log(req.ip, req.ips);
   res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 
 publicRouter.get("/login", (req: express.Request, res: express.Response) => {
+  console.log(req.ip, req.ips);
   res.sendFile(path.join(__dirname, "../public/login.html"));
 });
 
 publicRouter.get("/projects", (req: express.Request, res: express.Response) => {
+  console.log(req.ip, req.ips);
   res.sendFile(path.join(__dirname, "../public/projects.html"));
 });
 
 publicRouter.get(
   "/projects/:projectName",
   (req: express.Request, res: express.Response) => {
+    console.log(req.ip, req.ips);
     res.sendFile(path.join(__dirname, "../public/projects.html"));
   }
 );
@@ -30,6 +34,7 @@ publicRouter.get(
 publicRouter.get(
   "/projects/:projectName/*splat",
   (req: express.Request, res: express.Response) => {
+    console.log(req.ip, req.ips);
     res.sendFile(path.join(__dirname, "../public/projects.html"));
   }
 );
@@ -37,6 +42,7 @@ publicRouter.get(
 publicRouter.get(
   "/create-project.html",
   (req: express.Request, res: express.Response) => {
+    console.log(req.ip, req.ips);
     res.redirect("/");
   }
 );
@@ -45,6 +51,7 @@ publicRouter.get(
   "/create-project",
   requireAuth,
   (req: express.Request, res: express.Response) => {
+    console.log(req.ip, req.ips);
     res.sendFile(path.join(__dirname, "../protected/create-project.html"));
   }
 );
