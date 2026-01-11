@@ -9,7 +9,16 @@ const __dirname = path.dirname(__filename);
 const publicRouter: express.Router = express.Router();
 
 publicRouter.get("/", (req: express.Request, res: express.Response) => {
-  console.log(req.ip, req.ips);
+  const date: Date = new Date();
+  console.log(
+    req.ip,
+    req.ips,
+    `${new Intl.DateTimeFormat("en-us", {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    }).format(date)}, ${date.toLocaleTimeString()}`
+  );
   res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 
