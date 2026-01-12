@@ -73,12 +73,12 @@ publicRouter.get(
     const date: Date = new Date();
     console.log(
       `${req.ip},
-    ${req.ips},
-    ${new Intl.DateTimeFormat("en-us", {
-      month: "long",
-      day: "numeric",
-      year: "numeric",
-    }).format(date)}, ${date.toLocaleTimeString()}`
+      ${new Intl.DateTimeFormat("en-us", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+      }).format(date)}, ${date.toLocaleTimeString()} 
+      requested /`
     );
     res.sendFile(path.join(__dirname, "../public/projects.html"));
   }
@@ -90,12 +90,12 @@ publicRouter.get(
     const date: Date = new Date();
     console.log(
       `${req.ip},
-    ${req.ips},
-    ${new Intl.DateTimeFormat("en-us", {
-      month: "long",
-      day: "numeric",
-      year: "numeric",
-    }).format(date)}, ${date.toLocaleTimeString()}`
+      ${new Intl.DateTimeFormat("en-us", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+      }).format(date)}, ${date.toLocaleTimeString()}
+      requested /create-project.html`
     );
     res.redirect("/");
   }
@@ -108,12 +108,12 @@ publicRouter.get(
     const date: Date = new Date();
     console.log(
       `${req.ip},
-    ${req.ips},
-    ${new Intl.DateTimeFormat("en-us", {
-      month: "long",
-      day: "numeric",
-      year: "numeric",
-    }).format(date)}, ${date.toLocaleTimeString()}`
+      ${new Intl.DateTimeFormat("en-us", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+      }).format(date)}, ${date.toLocaleTimeString()}
+      requested /create-project`
     );
     res.sendFile(path.join(__dirname, "../protected/create-project.html"));
   }
