@@ -23,19 +23,46 @@ publicRouter.get("/", (req: express.Request, res: express.Response) => {
 });
 
 publicRouter.get("/login", (req: express.Request, res: express.Response) => {
-  console.log(req.ip, req.ips);
+  const date: Date = new Date();
+  console.log(
+    `${req.ip},
+    ${req.ips},
+    ${new Intl.DateTimeFormat("en-us", {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    }).format(date)}, ${date.toLocaleTimeString()}`
+  );
   res.sendFile(path.join(__dirname, "../public/login.html"));
 });
 
 publicRouter.get("/projects", (req: express.Request, res: express.Response) => {
-  console.log(req.ip, req.ips);
+  const date: Date = new Date();
+  console.log(
+    `${req.ip},
+    ${req.ips},
+    ${new Intl.DateTimeFormat("en-us", {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    }).format(date)}, ${date.toLocaleTimeString()}`
+  );
   res.sendFile(path.join(__dirname, "../public/projects.html"));
 });
 
 publicRouter.get(
   "/projects/:projectName",
   (req: express.Request, res: express.Response) => {
-    console.log(req.ip, req.ips);
+    const date: Date = new Date();
+    console.log(
+      `${req.ip},
+    ${req.ips},
+    ${new Intl.DateTimeFormat("en-us", {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    }).format(date)}, ${date.toLocaleTimeString()}`
+    );
     res.sendFile(path.join(__dirname, "../public/projects.html"));
   }
 );
@@ -43,7 +70,16 @@ publicRouter.get(
 publicRouter.get(
   "/projects/:projectName/*splat",
   (req: express.Request, res: express.Response) => {
-    console.log(req.ip, req.ips);
+    const date: Date = new Date();
+    console.log(
+      `${req.ip},
+    ${req.ips},
+    ${new Intl.DateTimeFormat("en-us", {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    }).format(date)}, ${date.toLocaleTimeString()}`
+    );
     res.sendFile(path.join(__dirname, "../public/projects.html"));
   }
 );
@@ -51,7 +87,16 @@ publicRouter.get(
 publicRouter.get(
   "/create-project.html",
   (req: express.Request, res: express.Response) => {
-    console.log(req.ip, req.ips);
+    const date: Date = new Date();
+    console.log(
+      `${req.ip},
+    ${req.ips},
+    ${new Intl.DateTimeFormat("en-us", {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    }).format(date)}, ${date.toLocaleTimeString()}`
+    );
     res.redirect("/");
   }
 );
@@ -60,7 +105,16 @@ publicRouter.get(
   "/create-project",
   requireAuth,
   (req: express.Request, res: express.Response) => {
-    console.log(req.ip, req.ips);
+    const date: Date = new Date();
+    console.log(
+      `${req.ip},
+    ${req.ips},
+    ${new Intl.DateTimeFormat("en-us", {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    }).format(date)}, ${date.toLocaleTimeString()}`
+    );
     res.sendFile(path.join(__dirname, "../protected/create-project.html"));
   }
 );
