@@ -11,9 +11,9 @@ const publicRouter: express.Router = express.Router();
 publicRouter.get("/", (req: express.Request, res: express.Response) => {
   const date: Date = new Date();
   console.log(
-    req.ip,
-    req.ips,
-    `${new Intl.DateTimeFormat("en-us", {
+    `${req.ip},
+    ${req.ips},
+    ${new Intl.DateTimeFormat("en-us", {
       month: "long",
       day: "numeric",
       year: "numeric",
