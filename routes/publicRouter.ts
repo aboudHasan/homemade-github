@@ -12,12 +12,12 @@ publicRouter.get("/", (req: express.Request, res: express.Response) => {
   const date: Date = new Date();
   console.log(
     `${req.ip},
-    ${req.ips},
-    ${new Intl.DateTimeFormat("en-us", {
-      month: "long",
-      day: "numeric",
-      year: "numeric",
-    }).format(date)}, ${date.toLocaleTimeString()}`
+      ${new Intl.DateTimeFormat("en-us", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+      }).format(date)}, ${date.toLocaleTimeString()}
+      requested /`
   );
   res.sendFile(path.join(__dirname, "../public/index.html"));
 });
@@ -26,12 +26,12 @@ publicRouter.get("/login", (req: express.Request, res: express.Response) => {
   const date: Date = new Date();
   console.log(
     `${req.ip},
-    ${req.ips},
-    ${new Intl.DateTimeFormat("en-us", {
-      month: "long",
-      day: "numeric",
-      year: "numeric",
-    }).format(date)}, ${date.toLocaleTimeString()}`
+      ${new Intl.DateTimeFormat("en-us", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+      }).format(date)}, ${date.toLocaleTimeString()}
+      requested /login`
   );
   res.sendFile(path.join(__dirname, "../public/login.html"));
 });
@@ -40,12 +40,12 @@ publicRouter.get("/projects", (req: express.Request, res: express.Response) => {
   const date: Date = new Date();
   console.log(
     `${req.ip},
-    ${req.ips},
-    ${new Intl.DateTimeFormat("en-us", {
-      month: "long",
-      day: "numeric",
-      year: "numeric",
-    }).format(date)}, ${date.toLocaleTimeString()}`
+      ${new Intl.DateTimeFormat("en-us", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+      }).format(date)}, ${date.toLocaleTimeString()}
+      requested /projects`
   );
   res.sendFile(path.join(__dirname, "../public/projects.html"));
 });
@@ -56,12 +56,12 @@ publicRouter.get(
     const date: Date = new Date();
     console.log(
       `${req.ip},
-    ${req.ips},
-    ${new Intl.DateTimeFormat("en-us", {
-      month: "long",
-      day: "numeric",
-      year: "numeric",
-    }).format(date)}, ${date.toLocaleTimeString()}`
+      ${new Intl.DateTimeFormat("en-us", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+      }).format(date)}, ${date.toLocaleTimeString()}
+      requested a project`
     );
     res.sendFile(path.join(__dirname, "../public/projects.html"));
   }
@@ -78,7 +78,7 @@ publicRouter.get(
         day: "numeric",
         year: "numeric",
       }).format(date)}, ${date.toLocaleTimeString()} 
-      requested /`
+      requested a project file`
     );
     res.sendFile(path.join(__dirname, "../public/projects.html"));
   }
