@@ -17,8 +17,10 @@ publicRouter.get("/", (req: express.Request, res: express.Response) => {
         day: "numeric",
         year: "numeric",
       }).format(date)}, ${date.toLocaleTimeString()}
-      requested /`
+      requested /`,
   );
+  console.log("someone requested /");
+  console.log(req.ip);
   res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 
@@ -31,7 +33,7 @@ publicRouter.get("/login", (req: express.Request, res: express.Response) => {
         day: "numeric",
         year: "numeric",
       }).format(date)}, ${date.toLocaleTimeString()}
-      requested /login`
+      requested /login`,
   );
   res.sendFile(path.join(__dirname, "../public/login.html"));
 });
@@ -45,7 +47,7 @@ publicRouter.get("/projects", (req: express.Request, res: express.Response) => {
         day: "numeric",
         year: "numeric",
       }).format(date)}, ${date.toLocaleTimeString()}
-      requested /projects`
+      requested /projects`,
   );
   res.sendFile(path.join(__dirname, "../public/projects.html"));
 });
@@ -61,10 +63,10 @@ publicRouter.get(
         day: "numeric",
         year: "numeric",
       }).format(date)}, ${date.toLocaleTimeString()}
-      requested a project`
+      requested a project`,
     );
     res.sendFile(path.join(__dirname, "../public/projects.html"));
-  }
+  },
 );
 
 publicRouter.get(
@@ -78,10 +80,10 @@ publicRouter.get(
         day: "numeric",
         year: "numeric",
       }).format(date)}, ${date.toLocaleTimeString()} 
-      requested a project file`
+      requested a project file`,
     );
     res.sendFile(path.join(__dirname, "../public/projects.html"));
-  }
+  },
 );
 
 publicRouter.get(
@@ -95,10 +97,10 @@ publicRouter.get(
         day: "numeric",
         year: "numeric",
       }).format(date)}, ${date.toLocaleTimeString()}
-      requested /create-project.html`
+      requested /create-project.html`,
     );
     res.redirect("/");
-  }
+  },
 );
 
 publicRouter.get(
@@ -113,10 +115,10 @@ publicRouter.get(
         day: "numeric",
         year: "numeric",
       }).format(date)}, ${date.toLocaleTimeString()}
-      requested /create-project`
+      requested /create-project`,
     );
     res.sendFile(path.join(__dirname, "../protected/create-project.html"));
-  }
+  },
 );
 
 export default publicRouter;
