@@ -19,8 +19,6 @@ publicRouter.get("/", (req: express.Request, res: express.Response) => {
       }).format(date)}, ${date.toLocaleTimeString()}
       requested /`,
   );
-  console.log("someone requested /");
-  console.log(req.ip);
   res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 
